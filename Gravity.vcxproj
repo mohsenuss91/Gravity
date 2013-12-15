@@ -11,16 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include=".gitattributes" />
-    <None Include=".gitignore" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="Source\Engine.cpp" />
     <ClCompile Include="Source\Gravity.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Engine.h" />
     <ClInclude Include="Source\Gravity.h" />
     <ClInclude Include="Source\Resource.h" />
     <ClInclude Include="Source\stdafx.h" />
@@ -36,6 +34,10 @@
   <ItemGroup>
     <Text Include="Source\ReadMe.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ogre.cfg" />
+    <None Include="resources.cfg" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C2EA07AC-81CD-437E-BA66-C10FAD125703}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -46,7 +48,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -67,6 +69,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <SourcePath>\Source;$(SourcePath)</SourcePath>
+    <LibraryPath>Dependencies\Boost\lib;C:\Users\Anis\Documents\GitHub\Gravity\Dependencies\Ogre\lib\deb;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -78,11 +82,22 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AdditionalIncludeDirectories>Dependencies\Boost;Dependencies\Ogre\include\OGRE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>OgreMain_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)Dependencies\Ogre\lib\deb\OgreMain_d.dll $(OutDir)OgreMain_d.dll
+copy $(ProjectDir)Dependencies\Ogre\lib\deb\RenderSystem_Direct3D9_d.dll $(OutDir)RenderSystem_Direct3D9_d.dll
+copy $(ProjectDir)Dependencies\Ogre\lib\deb\RenderSystem_Direct3D11_d.dll $(OutDir)RenderSystem_Direct3D11_d.dll
+copy $(ProjectDir)Dependencies\Ogre\lib\deb\RenderSystem_GL_d.dll $(OutDir)RenderSystem_GL_d.dll
+copy $(ProjectDir)Dependencies\Ogre\lib\deb\Plugin_ParticleFX_d.dll $(OutDir)Plugin_ParticleFX_d.dll
+copy $(ProjectDir)ogre.cfg $(OutDir)ogre.cfg
+copy $(ProjectDir)resources.cfg $(OutDir)resources.cfg</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

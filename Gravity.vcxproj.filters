@@ -15,14 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include=".gitignore" />
-    <None Include=".gitattributes" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="Source\Gravity.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Source\stdafx.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -37,6 +36,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Source\targetver.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -55,5 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Source\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources.cfg" />
+    <None Include="ogre.cfg" />
   </ItemGroup>
 </Project>

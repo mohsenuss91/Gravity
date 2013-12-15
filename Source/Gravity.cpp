@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "Gravity.h"
+#include "Engine.h"
 
 #define MAX_LOADSTRING 100
 
@@ -10,6 +11,7 @@
 HINSTANCE hInst;								// instance actuelle
 TCHAR szTitle[MAX_LOADSTRING];					// Le texte de la barre de titre
 TCHAR szWindowClass[MAX_LOADSTRING];			// le nom de la classe de fenêtre principale
+Engine* ogreEngine;
 
 // Pré-déclarations des fonctions incluses dans ce module de code :
 ATOM				MyRegisterClass(HINSTANCE hInstance);
@@ -43,7 +45,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_GRAVITY));
 
 	// Boucle de messages principale :
-	while (GetMessage(&msg, NULL, 0, 0))
+	while (GetMessage(&msg, nullptr, 0, 0))
 	{
 		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
 		{
@@ -74,7 +76,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 	wcex.cbWndExtra		= 0;
 	wcex.hInstance		= hInstance;
 	wcex.hIcon			= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_GRAVITY));
-	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
+	wcex.hCursor		= LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
 	wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_GRAVITY);
 	wcex.lpszClassName	= szWindowClass;
@@ -100,12 +102,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // Stocke le handle d'instance dans la variable globale
 
    hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
+      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
       return FALSE;
    }
+
+   // initialise ogre
+   ogreEngine = new Engine(hWnd);
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
@@ -149,7 +154,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		// TODO: ajoutez ici le code de dessin...
+		
+		ogreEngine->root->renderOneFrame();
+
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_DESTROY:
