@@ -70,7 +70,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <SourcePath>\Source;$(SourcePath)</SourcePath>
-    <LibraryPath>Dependencies\Boost\lib;C:\Users\Anis\Documents\GitHub\Gravity\Dependencies\Ogre\lib\deb;$(LibraryPath)</LibraryPath>
+    <LibraryPath>Dependencies\Boost\lib;Dependencies\Ogre\lib\deb;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
