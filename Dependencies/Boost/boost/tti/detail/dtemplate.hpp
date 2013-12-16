@@ -10,7 +10,7 @@
 #include <boost/config.hpp>
 #include <boost/mpl/has_xxx.hpp>
 #include <boost/preprocessor/cat.hpp>
-#include <boost/preprocessor/debug/assert.hpp>
+#include <boost/preprocessor/debugg/assert.hpp>
 #include <boost/preprocessor/facilities/is_empty.hpp>
 
 #define BOOST_TTI_DETAIL_IS_HELPER_BOOST_PP_NIL
