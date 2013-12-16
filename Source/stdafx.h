@@ -8,6 +8,11 @@
 #include "targetver.h"
 
 #define WIN32_LEAN_AND_MEAN             // Exclure les en-têtes Windows rarement utilisés
+#ifdef _DEBUG
+// Fichiers d'en-tête Console :
+
+#include <iostream>
+#endif
 // Fichiers d'en-tête Windows :
 #include <windows.h>
 
